@@ -4,7 +4,7 @@
     <title>DEMOLITION</title>
 </head>
 <body>
-Hello
+COMPLETED WORK LOG
 <br>
 {{#username}}
 Hello, {{.}}!
@@ -12,7 +12,9 @@ Hello, {{.}}!
     <button type="submit">Logout</button>
 </form>
 <form action="/create-message" method="post">
-    <input type="text" name="message" placeholder="Write your message"/>
+    <input type="text" name="jobTitle" placeholder="Job Title"/>
+    <input type="text" name="jobLocation" placeholder="Job Location"/>
+    <input type="text" name="jobSize" placeholder="Job Size"/>
     <input type="hidden" name="replyId" value="{{replyId}}"/>
     <button type="submit">Submit</button>
 </form>
@@ -28,7 +30,10 @@ Hello, {{.}}!
 <br>
 {{/username}}
 
-{{#message}}
+{{#jobTitle}}
+{{#jobLocation}}
+{{#jobSize}}
+
 <h1>{{author}}: {{text}}</h1>
 {{#isMe}}
 <form action="/delete-message" method="post">
@@ -36,7 +41,10 @@ Hello, {{.}}!
     <button type="submit">Delete</button>
 </form>
 {{/isMe}}
-{{/message}}
+
+{{/jobTitle}}
+{{/jobLocation}}
+{{/jobSize}}
 
 {{#messages}}
 <a href="/?replyId={{id}}">{{author}}: {{text}}</a><br>

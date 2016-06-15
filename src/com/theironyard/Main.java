@@ -16,7 +16,7 @@ public class Main {
     public static void createTables(Connection conn) throws SQLException {
         Statement stmt = conn.createStatement();
         stmt.execute("CREATE TABLE IF NOT EXISTS users (id IDENTITY, name VARCHAR, password VARCHAR)");
-        stmt.execute("CREATE TABLE IF NOT EXISTS messages (id IDENTITY, reply_id INT, text VARCHAR, user_id INT)");
+        stmt.execute("CREATE TABLE IF NOT EXISTS messages (id IDENTITY, reply_id INT, job_title VARCHAR, job_size INT, job_location VARCHAR, user_id INT)");
     }
 
     public static void insertUser(Connection conn, String name, String password) throws SQLException {
@@ -155,10 +155,12 @@ public class Main {
                     }
 
                     int replyId = Integer.valueOf(request.queryParams("replyId"));
-                    String text = request.queryParams("message");
+                    String title = request.queryParams("jobTitle");
+                    String location = request.queryParams("jobLocation");
+                    int size = Integer.valueOf(request.queryParams("jobSize"));
 
                     User user = selectUser(conn, username);
-                    insertMessage(conn, replyId, text, user.id);
+                    insertMessage(conn, replyId, title, location, size, user.id);
 
                     response.redirect(request.headers("Referer"));
                     return "";
