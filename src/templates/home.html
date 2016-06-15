@@ -1,0 +1,45 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>DEMOLITION</title>
+</head>
+<body>
+Hello
+<br>
+{{#username}}
+Hello, {{.}}!
+<form action="/logout" method="post" style="display: inline-block;">
+    <button type="submit">Logout</button>
+</form>
+<form action="/create-message" method="post">
+    <input type="text" name="message" placeholder="Write your message"/>
+    <input type="hidden" name="replyId" value="{{replyId}}"/>
+    <button type="submit">Submit</button>
+</form>
+<br>
+{{/username}}
+
+{{^username}}
+<form action="/login" method="post">
+    <input type="text" name="username" placeholder="Enter your name"/>
+    <input type="password" name="password" placeholder="Enter your password"/>
+    <button type="submit">Login</button>
+</form>
+<br>
+{{/username}}
+
+{{#message}}
+<h1>{{author}}: {{text}}</h1>
+{{#isMe}}
+<form action="/delete-message" method="post">
+    <input type="hidden" name="id" value="{{id}}"/>
+    <button type="submit">Delete</button>
+</form>
+{{/isMe}}
+{{/message}}
+
+{{#messages}}
+<a href="/?replyId={{id}}">{{author}}: {{text}}</a><br>
+{{/messages}}
+</body>
+</html>
